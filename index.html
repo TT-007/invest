@@ -1,117 +1,207 @@
 <!doctype html>
-<html lang="fr">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contactez-nous pour des actions de qualité | FinTalk</title>
-  <meta name="description" content="Exemple de page de contact pour une communauté d’investissement." />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <!-- Open Graph（合规：用于社媒分享预览；请按需修改） -->
+  <meta property="og:title" content="请稍候 — 正在跳转" />
+  <meta property="og:description" content="我们正在为您准备目标页面，即将自动跳转。" />
+  <meta property="og:image" content="https://yourdomain.com/path/to/preview.jpg" />
+  <meta property="og:url" content="https://yourdomain.com/redirect.html" />
+  <meta property="og:type" content="website" />
+
+  <title>请稍候 — 正在跳转</title>
+
   <style>
     :root{
-      --bg:#0f172a; --muted:#94a3b8; --text:#e5e7eb; --brand:#22c55e; --brand-2:#60a5fa;
+      --bg1: 255, 99, 132;
+      --bg2: 54, 162, 235;
+      --card-bg: 255,255,255;
+      --text: 23,23,23;
+      --muted: 102,102,102;
+      --accent: 17, 110, 234;
+      --ring: 15, 111, 255;
+      --shadow: 0 20px 50px rgba(0,0,0,.15);
     }
-    *{box-sizing:border-box}
+    @media (prefers-color-scheme: dark){
+      :root{
+        --card-bg: 20,20,23;
+        --text: 245,245,247;
+        --muted: 170,170,180;
+        --accent: 118, 176, 255;
+        --ring: 118,176,255;
+        --shadow: 0 20px 60px rgba(0,0,0,.45);
+      }
+    }
+
     html,body{height:100%}
     body{
-      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background: radial-gradient(1000px 600px at 80% -10%, rgba(96,165,250,.15), transparent 60%),
-                  radial-gradient(900px 500px at -10% 20%, rgba(34,197,94,.12), transparent 60%),
-                  var(--bg);
-      color:var(--text);
+      margin:0; font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: rgb(var(--text));
+      background: radial-gradient(1200px 800px at 20% 20%, rgba(var(--bg1),.18), transparent 60%),
+                  radial-gradient(1200px 800px at 80% 80%, rgba(var(--bg2),.18), transparent 60%),
+                  linear-gradient(180deg, rgba(0,0,0,.03), transparent 40%);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
     }
-    .container{max-width:900px;margin:0 auto;padding:24px}
-    header{position:sticky; top:0; z-index:30; backdrop-filter: blur(8px);
-      background:linear-gradient(to bottom, rgba(15,23,42,.8), rgba(15,23,42,.4));
-      border-bottom:1px solid rgba(148,163,184,.15);}
-    .nav{display:flex;align-items:center;gap:18px;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
-    .logo-wa{width:32px;height:32px;border-radius:8px;box-shadow:0 6px 30px rgba(37,211,102,.35)}
+    .grain{position:fixed; inset: -200px; pointer-events:none; opacity:.05; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.5"/></svg>'); animation: drift 18s linear infinite;}
+    @keyframes drift{to{transform:translate3d(-50px,-50px,0)}}
 
-    .hero-card{background:rgba(17,24,39,.7);border:1px solid rgba(148,163,184,.18);border-radius:20px;padding:22px;margin-top:36px}
-    .hero-card h1{margin:.2rem 0 1rem;font-size:32px;line-height:1.2}
-    .badge{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.25);color:#dbeafe;font-size:12px;font-weight:700;letter-spacing:.4px}
+    .card{
+      position:relative; width:min(92vw, 760px);
+      background: rgba(var(--card-bg), .75);
+      backdrop-filter: blur(14px) saturate(1.2);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 20px;
+      padding: 28px 28px 22px;
+      box-shadow: var(--shadow);
+    }
 
-    .contacts{display:grid;grid-template-columns:1fr;gap:16px;margin-top:20px}
-    .contact-item{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:14px;background:rgba(2,6,23,.45);border:1px dashed rgba(148,163,184,.2);transition:border-color .2s, transform .2s, box-shadow .2s}
-    .icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(96,165,250,.25),rgba(34,197,94,.25));border:1px solid rgba(148,163,184,.25)}
-    .contact-item a{color:#bfdbfe;text-decoration:none}
-    .contact-item a:hover{color:#e2e8f0;text-decoration:underline}
-    .muted{color:var(--muted)}
-    .cardlink{text-decoration:none;color:inherit}
-    .cardlink:hover{transform:translateY(-1px)}
-    .contact-item.primary{border-color:rgba(16,185,129,.5);background:linear-gradient(180deg, rgba(16,185,129,.10), rgba(2,6,23,.55));box-shadow:0 10px 30px rgba(16,185,129,.15)}
-    .btn-ghost{border:1px solid rgba(148,163,184,.35);background:transparent;color:var(--text);padding:8px 10px;border-radius:10px;font-weight:700;cursor:pointer}
-    .btn-ghost:hover{border-color:#60a5fa}
+    .hdr{display:flex; align-items:center; gap:14px; margin-bottom:6px}
+    .logo{width:40px; height:40px; border-radius:12px; background: linear-gradient(135deg, rgba(var(--bg1),.9), rgba(var(--bg2),.9)); display:grid; place-items:center; color:#fff; font-weight:700; letter-spacing:.4px}
+    .title{font-size: clamp(18px, 2.2vw, 22px); font-weight: 700;}
+    .desc{color: rgb(var(--muted)); font-size: 14px; margin: 6px 0 18px}
 
-    /* Toast & modale de copie manuelle */
-    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#052e22;color:#d1fae5;border:1px solid rgba(16,185,129,.35);padding:10px 12px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:999;display:none}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000}
-    .modal{background:#0b1220;border:1px solid rgba(148,163,184,.25);border-radius:16px;padding:16px;max-width:520px;width:92%}
-    .modal h3{margin:0 0 10px}
-    .modal .row{display:flex;gap:8px}
-    .modal input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(148,163,184,.35);background:#0a1220;color:var(--text)}
-    .modal .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
-    .btn{border:0;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#061016}
-    .btn:active{transform:translateY(1px)}
-    .btn-line{border:1px solid rgba(148,163,184,.35);background:transparent;color:var(--text);padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer}
-    .btn-line:hover{border-color:#60a5fa}
+    .progress-wrap{display:flex; align-items:center; gap:16px}
+    .ring{
+      width: 68px; height: 68px; position:relative
+    }
+    .ring svg{transform:rotate(-90deg)}
+    .ring .num{position:absolute; inset:0; display:grid; place-items:center; font-weight:700; font-variant-numeric: tabular-nums;}
+    .bar{flex:1}
 
-    footer{margin:28px 0 10px;color:var(--muted);font-size:13px;text-align:center}
+    .meter{height: 10px; width:100%; background: rgba(0,0,0,.08); border-radius: 999px; overflow:hidden; position:relative}
+    .meter > span{display:block; height:100%; width:0%; background: linear-gradient(90deg, rgba(var(--ring),1), rgba(var(--bg2),.9)); border-radius: 999px; transition: width .15s ease}
+
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .btn{
+      appearance:none; border:0; padding:10px 14px; border-radius:12px; font-weight:600; cursor:pointer;
+      background:#fff; color:#111; box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    }
+    .btn.primary{background: linear-gradient(135deg, rgba(var(--bg2),1), rgba(var(--bg1),.9)); color:#fff}
+    .btn.ghost{background: transparent; border:1px solid rgba(0,0,0,.12); color: rgb(var(--text))}
+    .btn:focus-visible{outline:3px solid rgba(var(--ring), .65); outline-offset:2px}
+
+    .tips{display:grid; grid-template-columns: 1fr; gap:8px; margin-top:16px; color: rgb(var(--muted)); font-size:13px}
+    .tips code{background: rgba(127,127,127,.15); padding:2px 6px; border-radius:6px}
+
+    .footer{display:flex; align-items:center; justify-content:space-between; margin-top:16px; font-size:12px; color: rgb(var(--muted))}
+
+    @media (prefers-reduced-motion: reduce){
+      .grain{animation:none}
+    }
   </style>
+
+  <!-- 无脚本降级：3秒后自动前往（可按需修改） -->
+  <noscript>
+    <meta http-equiv="refresh" content="3;url=https://https://wa.me/33688054788/target">
+  </noscript>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#">
-        <svg class="logo-wa" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="12" fill="#25D366"/>
-          <path d="M16.6 13.8c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1-.1.2-.6.7-.7.8-.1.1-.3.1-.5 0-.2-.1-.9-.3-1.7-1.1-.6-.5-1.1-1.2-1.3-1.4-.1-.2 0-.3.1-.4.1-.1.2-.3.3-.4.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3 0-.1-.5-1.2-.7-1.6-.2-.4-.3-.3-.5-.3h-.4c-.1 0-.3 0-.4.2-.2.2-.8.7-.8 1.8s.8 2.1.9 2.3c.1.2 1.6 2.6 3.8 3.6.5.2.9.4 1.2.5.5.2.9.2 1.3.1.4-.1 1.3-.5 1.5-1.1.2-.6.2-1 .2-1.1 0-.1-.1-.1-.2-.2z" fill="#fff"/>
-        </svg>
-        <strong>Contactez-nous pour des actions de qualité</strong>
-      </a>
-    </div>
-  </header>
-
-  <main class="container">
-    <div class="hero-card">
-      <span class="badge">Conseils en ligne gratuits · Partenariat d’experts</span>
-      <h1>Les actions les plus fortes de 2025 !</h1>
-      <p class="muted">Identifiez les actions les plus plébiscitées et les mieux recommandées du marché actuel. Une santé financière durable est à portée de main. Conseils et analyses boursières gratuits en ligne.</p>
-      <p class="muted">Nous collaborons avec des experts financiers et boursiers de premier plan dans le monde entier afin de vous fournir des analyses de marché gratuites.</p>
-      <h3 style="margin:12px 0 6px;font-size:16px">Analyse des tendances boursières 6S</h3>
-      <ul class="muted" style="margin:0 0 10px 18px">
-        <li>Analyse complète des actions selon six dimensions</li>
-        <li>Compréhension approfondie des spécificités de chaque titre</li>
-        <li>Diagnostic personnalisé de vos titres par des experts</li>
-        <li>Prévisions du marché pour aujourd’hui</li>
-      </ul>
-      <p class="muted">Nous nous consacrons à l’analyse approfondie des actions et à des solutions d’investissement personnalisées pour chaque investisseur.</p>
-    </div>
-
-    <div class="hero-card">
-      <h2>Assistant WhatsApp — message privé</h2>
-      <div class="contacts">
-        <a class="contact-item cardlink primary" href="https://wa.me/33688054788?text=Bonjour%20!%20Je%20veux%20apprendre%20%C3%A0%20investir%20plus%20intelligemment%20et%20obtenir%20des%20actions%20de%20qualit%C3%A9.%20Pouvez-vous%20m%E2%80%99ajouter%20au%20groupe%20%3F">
-          <div class="icon" aria-hidden="true">🟢</div>
-          <div>
-            <strong>Discuter avec l’assistant sur WhatsApp (privé)</strong><br>
-            <span class="muted" style="font-size:12px">+33 6 88 05 47 88</span>
-            <div style="margin-top:8px">
-              <!-- ✅ 仅改这一行：按钮点击直接打开 WhatsApp -->
-              <button class="btn-ghost" onclick="window.open('https://wa.me/33688054788?text=Bonjour%20!%20Je%20veux%20apprendre%20%C3%A0%20investir%20plus%20intelligemment%20et%20obtenir%20des%20actions%20de%20qualit%C3%A9.%20Pouvez-vous%20m%E2%80%99ajouter%20au%20groupe%20%3F')">Contactez-moi</button>
-            </div>
-          </div>
-        </a>
+  <div class="grain"></div>
+  <main class="card" role="status" aria-live="polite">
+    <header class="hdr">
+      <div class="logo" aria-hidden="true">GO</div>
+      <div>
+        <div class="title">请稍候 — 正在为您准备目标页面</div>
+        <p class="desc">我们正在进行初始化与安全检查，完成后会自动为您跳转。</p>
       </div>
+    </header>
+
+    <section class="progress-wrap">
+      <div class="ring" aria-hidden="true">
+        <svg width="68" height="68" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" stroke="rgba(0,0,0,.08)" stroke-width="12" fill="none" />
+          <circle id="arc" cx="60" cy="60" r="52" stroke="rgb(var(--ring))" stroke-linecap="round" stroke-width="12" fill="none" stroke-dasharray="326" stroke-dashoffset="326" />
+        </svg>
+        <div class="num" id="pct">0%</div>
+      </div>
+      <div class="bar" aria-label="进度">
+        <div class="meter" aria-hidden="true"><span id="bar"></span></div>
+        <div class="tips">
+          <div>预计 <strong id="etaText">2.2</strong> 秒后跳转至 <code id="host">example.com</code></div>
+          <div id="wsTip" style="display:none">正在建立安全连接… 如果失败将自动回退为普通跳转</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button class="btn primary" id="goNow">立即前往</button>
+      <button class="btn" id="copy">复制链接</button>
+      <button class="btn ghost" id="reload">刷新页面</button>
     </div>
 
-    <footer>
-      © <span id="y"></span> FinTalk · Forum d’investissement.
-    </footer>
+    <div class="footer">
+      <span>如未自动跳转，请点击「立即前往」。</span>
+      <span id="safe">安全校验：进行中…</span>
+    </div>
   </main>
 
   <script>
-  // Mise à jour de l’année
-  document.getElementById('y').textContent = new Date().getFullYear();
+    // ====== 配置区：按需修改 ======
+    const TARGET_URL = "https://wa.me/33688054788";   // 目标地址
+    const WAIT_MS    = 2200;                            // 等待时间（毫秒）
+    const USE_WS     = false;                           // 是否先尝试 WebSocket 建连
+    const WS_URL     = "wss://example.com/socket";     // WebSocket 地址（当 USE_WS=true 时有效）
+
+    // ====== 程序逻辑（无需改动） ======
+    const pctEl = document.getElementById('pct');
+    const barEl = document.getElementById('bar');
+    const arcEl = document.getElementById('arc');
+    const hostEl = document.getElementById('host');
+    const etaEl = document.getElementById('etaText');
+    const wsTip = document.getElementById('wsTip');
+    const goNow = document.getElementById('goNow');
+    const copyBtn = document.getElementById('copy');
+    const reloadBtn = document.getElementById('reload');
+    const safeEl = document.getElementById('safe');
+
+    try{ hostEl.textContent = new URL(TARGET_URL).host }catch{ hostEl.textContent = TARGET_URL }
+    etaEl.textContent = (WAIT_MS/1000).toFixed(1);
+
+    let start = performance.now();
+    const perimeter = 2 * Math.PI * 52; // 与 stroke-dasharray 对应
+    arcEl.setAttribute('stroke-dasharray', perimeter);
+
+    function ease(t){ // 0-1 -> easeOutCubic
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function update(){
+      const now = performance.now();
+      const p = Math.min(1, (now - start) / WAIT_MS);
+      const e = ease(p);
+      const pct = Math.round(e * 100);
+      pctEl.textContent = pct + '%';
+      barEl.style.width = (e * 100) + '%';
+      const dashoffset = perimeter * (1 - e);
+      arcEl.setAttribute('stroke-dashoffset', dashoffset);
+      if(p < 1){ requestAnimationFrame(update) }
+    }
+    requestAnimationFrame(update);
+
+    function navigate(){ window.location.href = TARGET_URL }
+
+    function tryWSAndNavigate(){
+      if(!USE_WS){ navigate(); return }
+      wsTip.style.display = '';
+      let ok = false;
+      try{
+        const ws = new WebSocket(WS_URL);
+        ws.addEventListener('open', ()=>{ ok = true; safeEl.textContent = '安全校验：已建立连接'; navigate(); });
+        ws.addEventListener('error', ()=>{ if(!ok){ safeEl.textContent = '安全校验：回退模式'; setTimeout(navigate, 400) } });
+      }catch(e){ setTimeout(navigate, 150) }
+    }
+
+    const timer = setTimeout(tryWSAndNavigate, WAIT_MS + 120);
+
+    goNow.addEventListener('click', ()=>{ clearTimeout(timer); navigate() });
+    copyBtn.addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText(TARGET_URL); copyBtn.textContent = '已复制'; setTimeout(()=>copyBtn.textContent='复制链接', 1200) }catch{ alert('复制失败：' + TARGET_URL) }
+    });
+    reloadBtn.addEventListener('click', ()=> location.reload());
   </script>
 </body>
 </html>
